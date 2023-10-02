@@ -4,7 +4,6 @@ import com.example.demo.dto.ClubDto;
 import com.example.demo.models.Club;
 import com.example.demo.repository.ClubRepository;
 import com.example.demo.service.ClubService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -25,7 +24,8 @@ public class ClubServiceImplement implements ClubService {
     }
 
     @Override
-    public Club saveClub(Club club) {
+    public Club saveClub(ClubDto clubDto) {
+        Club club = mapToClub(clubDto);
         return clubRepository.save(club);
     }
 
@@ -39,6 +39,11 @@ public class ClubServiceImplement implements ClubService {
     public void updateClub(ClubDto clubDto) {
         Club club = mapToClub(clubDto);
         clubRepository.save(club);
+    }
+
+    @Override
+    public void delete(Long clubId) {
+        clubRepository.deleteById(clubId);
     }
 
     private Club mapToClub(ClubDto club) {
@@ -59,7 +64,6 @@ public class ClubServiceImplement implements ClubService {
                 .titulo(club.getTitulo())
                 .conteudo(club.getConteudo())
                 .fotoUrl(club.getFotoUrl())
-                .criadoEm(club.getCriadoEm())
                 .atualizadoEm(club.getAtualizadoEm())
                 .build();
         return clubDto;
