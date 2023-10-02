@@ -24,6 +24,35 @@ public class ClubServiceImplement implements ClubService {
         return clubs.stream().map(club -> mapToClubDto(club)).collect(Collectors.toList());
     }
 
+    @Override
+    public Club saveClub(Club club) {
+        return clubRepository.save(club);
+    }
+
+    @Override
+    public ClubDto findClubById(Long clubId) {
+        Club club = clubRepository.findById(clubId).get();
+        return mapToClubDto(club);
+    }
+
+    @Override
+    public void updateClub(ClubDto clubDto) {
+        Club club = mapToClub(clubDto);
+        clubRepository.save(club);
+    }
+
+    private Club mapToClub(ClubDto club) {
+        Club clubDto = Club.builder()
+                .id(club.getId())
+                .titulo(club.getTitulo())
+                .conteudo(club.getConteudo())
+                .fotoUrl(club.getFotoUrl())
+                .criadoEm(club.getCriadoEm())
+                .atualizadoEm(club.getAtualizadoEm())
+                .build();
+        return clubDto;
+    }
+
     private ClubDto mapToClubDto(Club club) {
         ClubDto clubDto = ClubDto.builder()
                 .id(club.getId())
