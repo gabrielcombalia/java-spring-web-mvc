@@ -7,6 +7,7 @@ import lombok.Data;
 
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
@@ -21,5 +22,5 @@ public class ClubDto {
     private String conteudo;
     private LocalDateTime criadoEm;
     private LocalDateTime atualizadoEm;
-
+    private List<EventDto> events;
 }

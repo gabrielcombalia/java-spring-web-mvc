@@ -9,6 +9,9 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import static com.example.demo.mapper.ClubMapper.mapToClub;
+import static com.example.demo.mapper.ClubMapper.mapToClubDto;
+
 @Service
 public class ClubServiceImplement implements ClubService {
 
@@ -46,26 +49,10 @@ public class ClubServiceImplement implements ClubService {
         clubRepository.deleteById(clubId);
     }
 
-    private Club mapToClub(ClubDto club) {
-        Club clubDto = Club.builder()
-                .id(club.getId())
-                .titulo(club.getTitulo())
-                .conteudo(club.getConteudo())
-                .fotoUrl(club.getFotoUrl())
-                .criadoEm(club.getCriadoEm())
-                .atualizadoEm(club.getAtualizadoEm())
-                .build();
-        return clubDto;
+    @Override
+    public List<ClubDto> searchClubs(String query) {
+        List<Club> clubs = clubRepository.searchClubs(query);
+        return clubs.stream().map(club -> mapToClubDto(club)).collect(Collectors.toList());
     }
 
-    private ClubDto mapToClubDto(Club club) {
-        ClubDto clubDto = ClubDto.builder()
-                .id(club.getId())
-                .titulo(club.getTitulo())
-                .conteudo(club.getConteudo())
-                .fotoUrl(club.getFotoUrl())
-                .atualizadoEm(club.getAtualizadoEm())
-                .build();
-        return clubDto;
-    }
 }

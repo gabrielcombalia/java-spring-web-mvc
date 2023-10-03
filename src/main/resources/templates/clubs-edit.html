@@ -9,6 +9,8 @@
 
             <form role="form" method="post" th:action="@{/clubs/{clubId}/edit(clubId=${club.id})}" th:object="${club}">
                 <div class="form-row">
+                <input type="hidden" th:field="*{id}">
+                    <input type="hidden" th:field="*{criadoEm}">
 
                     <div class="form-group col-md-6">
                         <label for="titulo_label">Titulo</label>
