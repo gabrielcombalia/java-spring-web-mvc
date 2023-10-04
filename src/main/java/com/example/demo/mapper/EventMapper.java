@@ -2,9 +2,7 @@ package com.example.demo.mapper;
 
 import com.example.demo.dto.EventDto;
 import com.example.demo.models.Event;
-
 public class EventMapper {
-
     public static Event mapToEvent(EventDto eventDto) {
 
         return Event.builder()
@@ -16,7 +14,7 @@ public class EventMapper {
                 .fotoUrl(eventDto.getFotoUrl())
                 .criadoEm(eventDto.getCriadoEm())
                 .atualizadoEm(eventDto.getAtualizadoEm())
-
+                .club(eventDto.getClub())
                 .build();
 
 
@@ -35,7 +33,7 @@ public class EventMapper {
                 .fotoUrl(event.getFotoUrl())
                 .criadoEm(event.getCriadoEm())
                 .atualizadoEm(event.getAtualizadoEm())
-
+                .club(event.getClub())
                 .build();
 
 
